@@ -12,6 +12,6 @@ body {
 .timer-inner {
     height: 20px;
     float: left;
-    width: 50px;
+    width: 100px;
     background-color: green;
 }
