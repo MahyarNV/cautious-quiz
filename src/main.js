@@ -11,6 +11,7 @@ let elements = {
 
 let vars = {
     testTime: 5,
+    timerCounter: 0,
     score: 0,
     fpram: 0,
     spram: 0,
@@ -21,6 +22,7 @@ let vars = {
     timerWidth: 0,
 }
 let timerWidthIncreaser = 200 / vars.testTime
+var timer = null
 
 elements.startButton.disabled = false
 elements.nextButton.disabled = true
@@ -38,6 +40,9 @@ function submitAnswer(buttonId) {
     if (buttonId == elements.answer.id) {
         vars.score += 5
         elements.scoreBoard.innerHTML = vars.score
+        start()
+    } else {
+        start()
     }
 }
 
@@ -45,16 +50,19 @@ function startTimer() {
     vars.timerWidth = 0
     elements.timerInner.style.width = vars.timerWidth.toString() + "px"
     var timer = setInterval(function() {
+        vars.timerCounter += 1
         vars.timerWidth += timerWidthIncreaser
         elements.timerInner.style.width = vars.timerWidth.toString() + "px"
-        if (vars.timerWidth >= 200) {
-            vars.timerWidth = 0
+        if (vars.timerCounter == vars.testTime) {
             start()
         }
     }, 1000)
 }
 
 function start() {
+    vars.timerWidth = 0
+    vars.timerCounter = 0
+    clearInterval(timer)
     startTimer()
     elements.startButton.disabled = true
     // elements.nextButton.disabled = false
