@@ -12,6 +12,7 @@ let elements = {
 let vars = {
     testTime: 5,
     timerCounter: 0,
+    timer: null,
     score: 0,
     fpram: 0,
     spram: 0,
@@ -22,7 +23,6 @@ let vars = {
     timerWidth: 0,
 }
 let timerWidthIncreaser = 200 / vars.testTime
-var timer = null
 
 elements.startButton.disabled = false
 elements.nextButton.disabled = true
@@ -44,28 +44,31 @@ function submitAnswer(buttonId) {
     } else {
         start()
     }
+    return vars.score
 }
 
 function startTimer() {
     vars.timerWidth = 0
     elements.timerInner.style.width = vars.timerWidth.toString() + "px"
-    var timer = setInterval(function() {
+    vars.timer = setInterval(function() {
         vars.timerCounter += 1
         vars.timerWidth += timerWidthIncreaser
         elements.timerInner.style.width = vars.timerWidth.toString() + "px"
         if (vars.timerCounter == vars.testTime) {
+            // clearInterval(vars.timer)
             start()
         }
     }, 1000)
+    return '!'
 }
 
 function start() {
     vars.timerWidth = 0
     vars.timerCounter = 0
-    clearInterval(timer)
+    clearInterval(vars.timer)
     startTimer()
     elements.startButton.disabled = true
-    // elements.nextButton.disabled = false
+    elements.nextButton.disabled = false
 
     vars.char = choose(vars.chars)
     vars.fpram = random(0, 20)
