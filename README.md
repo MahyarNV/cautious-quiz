@@ -1,2 +1,2 @@
 # cautious-test
-A js built test application 🔥🔥
+A simple javascript application to take unsecured exams! 
