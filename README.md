@@ -1,2 +1,2 @@
 # cautious-test
-A simple javascript application to take unsecured exams! 
+A simple javascript application to take unsecured exams!  :)
